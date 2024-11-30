@@ -11,9 +11,6 @@ jobs:
       - image: cimg/openjdk:23.0.1
     steps:
       - checkout
-      - run: 
-          name: maven-install
-          command: apt-get update && apt-get install -y maven
       - run:
           name: odpal-testy
           command: mvn test
