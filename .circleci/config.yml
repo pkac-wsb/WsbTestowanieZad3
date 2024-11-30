@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run: 
           name: maven-install
-          command: mvn install
+          command: apt-get update && apt-get install -y maven
       - run:
           name: odpal-testy
-          command: mvn run test
+          command: mvn test
