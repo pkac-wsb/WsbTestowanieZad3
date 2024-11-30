@@ -1,1 +1,15 @@
 version: 2.1
+
+workflows: 
+  odpalTest:
+    jobs:
+      - build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:23.0.1
+    steps:
+      - checkout
+      - run: java --version
+  
