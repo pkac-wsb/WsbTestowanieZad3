@@ -11,5 +11,5 @@ jobs:
       - image: cimg/openjdk:23.0.1
     steps:
       - checkout
-      - run: java --version
+      - run: java --versi
   
