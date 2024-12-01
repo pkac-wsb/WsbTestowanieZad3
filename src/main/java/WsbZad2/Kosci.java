@@ -3,15 +3,47 @@ package WsbZad2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Kosci {
 
     Random rand = new Random();
-    int playerPoints = 0;
-    int computerPoints = 0;
-    int[] rzutComputer = rzucWszystkie();
-    int[] rzutPlayer = rzucWszystkie();
+    public int playerPoints = 0;
+    public int computerPoints = 0;
+    public int[] rzutComputer = rzucWszystkie();
+    public int[] rzutPlayer = rzucWszystkie();
 
+    public void gra() {
+        System.out.println("Twoj rzut: ");
+        czytajRzut(rzutPlayer);
+        finalnePunktyComputer();
+        System.out.println("Chcesz poprawic rzut?");
+        System.out.println("0 - nie     1 tak");
+        if(input1or0() == 0){
+            finalnePunktyGracza();
+            System.out.println("rzut komputera: ");
+            czytajRzut(rzutComputer);
+            System.out.println("Twoje punkty: " + playerPoints + " Punkty Komputera: " + computerPoints);
+            System.out.println("Wygrywa " + winner());
+        }
+
+    }
+
+    public void finalnePunktyGracza() {
+        playerPoints = podliczPunkty(rzutPlayer);
+    }
+
+    public void finalnePunktyComputer() {
+        computerPoints = podliczPunkty(rzutComputer);
+    }
+
+    public String winner() {
+        if(playerPoints > computerPoints) {
+            return "gracz";
+        } else {
+            return "komputer";
+        }
+    }
 
     public int[] rzucWszystkie(){
         int[] rzut1 = new int[5];
@@ -27,7 +59,19 @@ public class Kosci {
         }
     }
 
-
+    public int podliczPunkty(int[] rzut) {
+        if(allEquals(rzut)) {
+            return 50;
+        } else if(allDifferent(rzut)) {
+            return 5;
+        } else {
+            int x = 0;
+            for(int i = 0; i < rzut.length; i++) {
+                x = x + rzut[i];
+            }
+            return x;
+        }
+    }
 
 
     public ArrayList<Integer> tabToArray(int[] rzut) {
@@ -53,12 +97,30 @@ public class Kosci {
             for(int j = i+1; j < rzut.length; j++) {
                 if(rzut[i] == rzut[j]) {
                     allD = false;
-                } else {
-                    allD = true;
                 }
             }
         }
         return allD;
+    }
+
+    public int input() {
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        if (x < 0 && x > 6) {
+            System.out.println("sproboj ponownie");
+            input();
+        }
+        return x;
+    }
+
+        public int input1or0() {
+            Scanner sc = new Scanner(System.in);
+            int x = sc.nextInt();
+            if(x != 1 && x != 0) {
+                System.out.println("sproboj ponownie");
+                input();
+            }
+            return x;
     }
 
 }

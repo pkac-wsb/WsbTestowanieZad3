@@ -53,11 +53,39 @@ class KosciTest {
     @Test
     public void prawieWszystkieRozne() {
         int[] tab = {2,2,2,2,5};
-        assertTrue(kosci.allDifferent(tab));
+        assertFalse(kosci.allDifferent(tab));
     }
 
+    @Test
+    public void punktyTakieSame() {
+        int[] tab = {3,3,3,3,3};
+        assertEquals(50, kosci.podliczPunkty(tab));
+    }
 
+    @Test
+    public void punktyZadneTakieSame() {
+        int[] tab = {2,1,4,5,6};
+        assertEquals(5, kosci.podliczPunkty(tab));
+    }
 
+    @Test
+    public void punktyPara() {
+        int[] tab = {2,1,2,5,6};
+        assertEquals(16, kosci.podliczPunkty(tab));
+    }
 
+    @Test
+    public void wygrywaGracz() {
+        kosci.computerPoints = 2;
+        kosci.playerPoints = 12;
+        assertEquals("gracz", kosci.winner());
+    }
+
+    @Test
+    public void wygrywaKomputer() {
+        kosci.computerPoints = 50;
+        kosci.playerPoints = 24;
+        assertEquals("komputer", kosci.winner());
+    }
 
 }
